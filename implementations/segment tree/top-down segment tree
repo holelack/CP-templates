@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+using ll = long long;
+vector<ll> tree;
+vector<int> seq;
+
+void build(int s, int e, int node) {
+    if (s==e) {
+        tree[node] = seq[s];
+        return;
+    }
+    int mid = (s+e)>>1;
+    build(s,mid,node<<1);
+    build(mid+1,e,node<<1|1);
+    tree[node] = tree[node<<1] + tree[node<<1|1];
+}
+
+void update(int s, int e, int idx, int val, int node) {
+    if (idx < s || e < idx) return;
+    if (s==e) {
+        tree[node] += val;
+        return;
+    }
+    int mid = (s+e)>>1;
+    update(s,mid,idx,val,node<<1);
+    update(mid+1,e,idx,val,node<<1|1);
+    tree[node] = tree[node<<1] + tree[node<<1|1];
+}
+
+ll query(int s, int e, int l, int r, int node) {
+    if (e < l || r < s) return 0;
+    if (l <= s && e <= r) return tree[node];
+    int mid = (s+e)>>1;
+    return query(s,mid,l,r,node<<1) + query(mid+1,e,l,r,node<<1|1);
+}
