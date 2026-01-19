@@ -36,7 +36,15 @@ void printMatrix(const Matrix& a, const std::string& name) {
         cout << '\n';
     }
 }
+template<typename T>
+auto makeND(int n, const T& val = T()) {
+    return vector<T>(n, val);
+}
 
+template<typename T, typename... Args>
+auto makeND(int n, Args... args) {
+    return vector(n, makeND<T>(args...));
+}
 #define dbg(x) debug((x), #x)
 #define dbgVec(x) debugVec((x), #x)
 #define dbg2D(x) printMatrix((x), #x)
