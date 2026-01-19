@@ -17,6 +17,7 @@ template<typename Matrix>
 void printMatrix(const Matrix& a, const std::string& name) {
     std::cout << name << ":\n";
     int n = a.size();
+    if (a.empty()) return;
     if (n == 0) return;
 
     int m = a[0].size();
@@ -36,6 +37,15 @@ void printMatrix(const Matrix& a, const std::string& name) {
         cout << '\n';
     }
 }
+
+template<typename Matrix>
+void print2D(const Matrix& a, const std::string& name) {
+    std::cout << name << ":\n";
+    for (auto i: a) {
+        for (int j: i) cout << j << " ";
+        cout << '\n';
+    }
+}
 template<typename T>
 auto makeND(int n, const T& val = T()) {
     return vector<T>(n, val);
@@ -47,4 +57,5 @@ auto makeND(int n, Args... args) {
 }
 #define dbg(x) debug((x), #x)
 #define dbgVec(x) debugVec((x), #x)
-#define dbg2D(x) printMatrix((x), #x)
+#define dbgmtrx(x) printMatrix((x), #x)
+#define dbg2D(x) print2D((x), #x)
