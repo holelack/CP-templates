@@ -19,6 +19,7 @@ struct P {
     P operator*(ll s) const { return {x*s, y*s}; }
     P sym(const P& a) const { return (*this)*2 - a; }
 };
+const P O = P(0,0);
 
 struct dP {
     double x,y;
@@ -58,6 +59,14 @@ inline ll ccw(P a, P b, P c){
 }
 inline double ccw(dP a, dP b, dP c){
     return cross(b-a, c-a);
+}
+
+inline dP perp(dP a){
+    return dP(-a.y, a.x);
+}
+
+inline P perp(P a){
+    return P(-a.y, a.x);
 }
 
 inline int sgn(ll x) { return (x > 0) - (x < 0); }
@@ -102,10 +111,5 @@ struct Line {
 
 struct Poly {
     vector<P> vertex;
-    Poly(const vector<P>& v): vertex(v) const {}
+    Poly(const vector<P>& v): vertex(v) {}
 };
-
-int main() {
-    fastio();
-    return 0;
-}
