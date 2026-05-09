@@ -4,11 +4,12 @@ using ll = long long;
 #define fastio() {ios::sync_with_stdio(0); cin.tie(0);}
 #define cross(a, b) ((a).x * (b).y - (a).y * (b).x)
 #define ccw(a,b) cross(b-a, c-a)
-int MAXN = 1e6 + 1;
+const int MAXN = 1e6 + 1;
 int N;
 
 struct P {
 	ll x, y;
+	P() {}
 	P(int x, int y) : x(x), y(y) {}
 	P operator-(const P& o) const {
 		return P(x - o.x, y - o.y);
@@ -33,6 +34,18 @@ bool intersect(P a, P b, P c, P d) {
 		return c <= b && a <= d;
 	}
 	return ab <= 0 && cd <= 0;
+}
+
+P points[MAXN];
+
+void init() {
+	fastio();
+	cin >> N;
+	ll x, y;
+	for (int i = 0; i < N; i++) {
+		cin >> x >> y;
+		points[i] = P(x, y);
+	}
 }
 
 int main() {
