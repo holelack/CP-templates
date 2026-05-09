@@ -26,6 +26,7 @@ void unite(int a, int b) {
 	int ra = find(a), rb = find(b);
 	if (ra == rb) return;
 	if (ra > rb) swap(ra, rb);
+	sz[ra] += sz[rb];
 	parent[rb] = ra;
 }
 
