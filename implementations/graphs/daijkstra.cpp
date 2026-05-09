@@ -28,12 +28,12 @@ void init() {
 		adj[u].emplace_back(Edge(v, w));
 		adj[v].emplace_back(Edge(u, w));
 	}
-	fill(dist, dist + N + 1, INF);
-	dist[1] = 0;
-	pq.push(Edge(1, 0));
 }
 
-void getDist() {
+void getDist(int source) {
+	fill(dist, dist + N + 1, INF);
+	dist[source] = 0;
+	pq.push(Edge(source, 0));
 	while (!pq.empty()) {
 		auto [u, d] = pq.top(); pq.pop();
 		if (d > dist[u]) continue;
