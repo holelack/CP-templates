@@ -30,7 +30,7 @@ void dfs(int u) {
 		sccid++;
 		while (!stk.empty()) {
 			int v = stk.top(); stk.pop();
-			visited[v] = true;
+			visited[v] = false;
 			SCC.back().push_back(v);
 			ID[v] = sccid;
 			if (u == v) break;
