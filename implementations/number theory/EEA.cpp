@@ -1,8 +1,10 @@
 pii EEA(int a, int b) {
-    vector<int> r[3];
-    r[0] = {a, b}:
-    r[1] = {1, 0};
-    r[2] = {0, 1};
+    vector<int> r[3] = {
+        {a, b},
+        {1, 0},
+        {0, 1}
+    };
+
     while (r[0].back()) {
         int len = r[0].size();
         int q = r[0][len-2] / r[0].back();
