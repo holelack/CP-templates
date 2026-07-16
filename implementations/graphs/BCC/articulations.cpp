@@ -15,6 +15,7 @@ int dfs(int u, int p = 0) {
 		if (disc[v]) low[u] = min(low[u], disc[v]); // back edge
 		else {
 			low[u] = min(low[u], dfs(v,u)); // tree edge
+			// point: <=, edge: <
 			if (disc[u] <= low[v] && p) cut[u] = 1; // 단절점 조건
 			child++;
 		}
