@@ -15,7 +15,7 @@ int dfs(int u, int p = 0) {
 	disc[u] = low[u] = ++dfsn;
 	for (int v : G[u]) {
 		if (v == p) continue;
-		if (!disc[v]) { // tree edge
+		if (!disc[v]) {
 			stk.push(pii(u, v));
 			low[u] = min(low[u], dfs(v, u));
 			if (disc[u] <= low[v]) {
@@ -23,11 +23,11 @@ int dfs(int u, int p = 0) {
 				pii e;
 				do {
 					e = stk.top(); stk.pop();
-					BCC.back().emplace_back(e);
+					BCC.back().push_back(e);
 				} while (e != pii(u, v));
 			}
 		}
-		else if (disc[v] < disc[u]) { // back edge -> 한 방향으로만(v<-u)
+		else if (disc[v] < disc[u]) {
 			stk.push(pii(u, v));
 			low[u] = min(low[u], disc[v]);
 		}
