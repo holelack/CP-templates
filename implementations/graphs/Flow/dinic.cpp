@@ -1,9 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-using ll = long long;
-#define fastio() {ios::sync_with_stdio(0); cin.tie(0);}
-const int MAXN = 501, INF = 1e9 + 1;
-int N;
 struct Edge {
 	int v, ref;
 	ll cap;
@@ -12,24 +6,28 @@ struct Edge {
 };
 
 struct Dinic {
-	int S, T;
 	vector<Edge> G[MAXN];
+	int S=0, T=0;
 	int lev[MAXN], nxt[MAXN];
 
+	void build(int V, int s, int t) {
+		for (int i = 0; i < V; i++) G[i].clear();
+		S = s; T = t;
+	}
+
 	void addEdge(int u, int v, ll cap) {
-		G[u].emplace_back(v, (int)G[v].size(), cap);
-		G[v].emplace_back(u, (int)G[u].size()-1, 0LL);
+		G[u].emplace_back(v, G[v].size(), cap);
+		G[v].emplace_back(u, G[u].size()-1, 0);
 	}
 
 	bool bfs() {
 		memset(lev, 0, sizeof(lev));
-		queue<int> q;
 		lev[S] = 1;
+		queue<int> q;
 		q.push(S);
-
 		while (!q.empty()) {
 			int u = q.front(); q.pop();
-			for (auto [v,cap,_] : G[u]) {
+			for (auto [v, _, cap] : G[u]) {
 				if (!lev[v] && cap) {
 					lev[v] = lev[u] + 1;
 					q.push(v);
@@ -53,7 +51,7 @@ struct Dinic {
 				}
 			}
 		}
-		return 0;
+		return 0LL;
 	}
 
 	ll getFlow() {
