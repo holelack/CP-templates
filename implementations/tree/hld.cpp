@@ -27,7 +27,7 @@ struct Seg {
 
 	void update(int l, int r, int v, int s = 1, int e = N, int node = 1) {
 		prop(s, e, node);
-		if (r <= s || e <= l) return;
+		if (r < s || e < l) return;
 		if (l <= s && e <= r) {
 			lazy[node] += v;
 			prop(s, e, node);
@@ -41,7 +41,7 @@ struct Seg {
 
 	ll query(int l, int r, int s = 1, int e = N, int node = 1) {
 		prop(s, e, node);
-		if (r <= s || e <= l) return 0;
+		if (r < s || e < l) return 0;
 		if (l <= s && e <= r) return tree[node];
 		int mid = (s + e) >> 1;
 		return query(l, r, s, mid, node << 1) + query(l, r, mid + 1, e, node << 1 | 1);
